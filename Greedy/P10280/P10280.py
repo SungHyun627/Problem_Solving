@@ -1,6 +1,6 @@
 from sys import stdin
 
-# stdin = open("./input.txt", 'r')
+stdin = open("./input.txt", 'r')
 
 # n : pizza의 수 , p: 선호하는 pizza의 index
 n, p = map(int, stdin.readline().rstrip().split())
