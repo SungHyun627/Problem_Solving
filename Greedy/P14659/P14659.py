@@ -1,6 +1,6 @@
 from sys import stdin
 
-# stdin = open('./input.txt', 'r')
+stdin = open('./input.txt', 'r')
 # 활잡이 / 봉우리 수
 n= int(stdin.readline().rstrip())
 
