@@ -3,7 +3,7 @@ from sys import setrecursionlimit
 
 stdin = open('./input.txt', 'r')
 
-# recursion한도 설정
+# recursion 한도 설정
 setrecursionlimit(10000)
 
 def DFS(x, y):
