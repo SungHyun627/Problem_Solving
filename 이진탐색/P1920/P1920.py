@@ -12,7 +12,7 @@ numArray.sort()
 def binary_search(array1, array2, n):
     for i in array2:
         start = 0
-        end = n-1
+        end = n - 1
         result = 0
         while start <= end:
             mid = (start + end) // 2
