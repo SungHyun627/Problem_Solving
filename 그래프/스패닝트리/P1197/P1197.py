@@ -8,7 +8,7 @@ stdin = open('./input.txt', 'r')
 # v : 정점 개수, e : 간선 개수
 v, e = map(int, stdin.readline().split())
 
-# parent node를 찾는 함수
+# 각 node의 parent node를 찾는 함수
 def find_parent(parent, x):
     if parent[x] != x:
         parent[x] = find_parent(parent, parent[x])
