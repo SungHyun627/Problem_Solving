@@ -4,7 +4,7 @@ from sys import setrecursionlimit
 stdin = open('input.txt', 'r')
 n = int(stdin.readline().rstrip())
 graph = [list(map(int, stdin.readline().rstrip().split())) for _ in range(n)]
-# print(graph)
+# #print(graph)
 
 # # recursion 한도 설정
 setrecursionlimit(10000)
