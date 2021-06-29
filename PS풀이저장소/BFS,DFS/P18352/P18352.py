@@ -3,7 +3,7 @@ from collections import deque
 
 stdin = open('./input.txt', 'r')
 
-# n: 도시의 개수, m: 도로의 개수, k: 거리 정보, x: 출발 도시 번호
+## n: 도시의 개수, m: 도로의 개수, k: 거리 정보, x: 출발 도시 번호
 n, m, k, x = map(int, stdin.readline().split())
 
 # 연결 리스트
