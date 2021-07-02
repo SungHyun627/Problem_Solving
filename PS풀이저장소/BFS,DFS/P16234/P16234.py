@@ -15,10 +15,6 @@ stdin = open('./input.txt', 'r')
 
 n, l, r = map(int, stdin.readline().rstrip().split())
 graph = [list(map(int, stdin.readline().rstrip().split())) for _ in range(n)]
-# print(graph)
-
-visited = [[False] * n for _ in range(n)]
-# print(visited)
 
 dx = [-1, 1, 0, 0]
 dy = [0, 0, 1, -1]
