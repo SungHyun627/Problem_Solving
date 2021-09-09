@@ -1,6 +1,3 @@
-from sys import maxsize
-
-
 str1 = "ABCDEF"
 str2 = "GBCDFE"
 
