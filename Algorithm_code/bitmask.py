@@ -20,7 +20,7 @@ print(bin(a | b))
 print(bin(a ^ b))
 
 #Shift(>>, <<) 연산 : a << b => a를 b칸 왼쪽으로 쉬프트
-print(bin(a & b))
+print(bin(a << b))
 
 #Not(~) 연산 : 비트 반전
 print(bin(~a))
