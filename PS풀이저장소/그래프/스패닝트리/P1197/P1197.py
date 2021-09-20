@@ -14,6 +14,7 @@ def find_parent(parent, x):
         parent[x] = find_parent(parent, parent[x])
     return parent[x]
 
+# parent node를 합치는 함수
 def union(parent, x, y):
     x = find_parent(parent, x)
     y = find_parent(parent, y)
