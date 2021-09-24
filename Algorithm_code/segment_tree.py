@@ -55,8 +55,7 @@ def find_interval_sum(node, start, end, left, right):
     mid = (start + end) // 2
     return find_interval_sum(node*2, start, mid, left, right) + find_interval_sum(node*2 + 1, mid+1, end, left, right)
 
-
-#구간 최소값 구하기
+#구간 최소 값 구하기
 def find_interval_min(node, start, end, left, right):
     if right < start or left > end:
         return int(1e9)
@@ -66,6 +65,24 @@ def find_interval_min(node, start, end, left, right):
     
     mid = (start + end) // 2
     return min(find_interval_min(node*2, start, mid, left, right), find_interval_min(node*2+1, mid+1, end, left, right))
+
+#최댓값, 최솟값 구하기
+def find_interval_max_min(node, start, end, left, right):
+    if right < start or left > end:
+        # print(node)
+        return [int(1e9), 0]
+    
+    if left <= start and right >= end:
+        # print(node, tree[node])
+        return tree[node]
+    
+    mid = (start + end) // 2
+    t1 = find_interval_max_min(node*2, start, mid, left, right)
+    t2 = find_interval_max_min(node*2+1, mid+1, end, left, right)
+    # print(node, t1, t2)
+    # print(min(t1[0], t2[0]), max(t1[1], t2[1]))
+    return [min(t1[0], t2[0]), max(t1[1], t2[1])]
+
 
 #트리 초기화
 init(1, 0, n-1)
