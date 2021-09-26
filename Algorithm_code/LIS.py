@@ -53,5 +53,10 @@ for i in range(1, n):
 print(Lis2)
 
 
+###LIS 구하는 법###
+#모든 원소에 대하여 LIS내의 index를 구한 후
+#LIS길이의 역순에 해당하는 인덱스부터 가장 빨리 해당 index가 나오는 element를 구한다.
+#차례로 구한 후 reverse하면, 구하고자 하는 LIS가 나온다.
+
 
     
