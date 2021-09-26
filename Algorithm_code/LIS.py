@@ -52,11 +52,23 @@ for i in range(1, n):
         Lis2[idx] = arr[i]
 print(Lis2)
 
+#LIS에서 각 원소가 위치하는 index를 기록하는 리스트
+dp_index = [0] * (n)
+dp_index[0] = 1
 
-###LIS 구하는 법###
+#최장 LIS
+answer = []
+
+###LIS 구하는 법### (answer)
 #모든 원소에 대하여 LIS내의 index를 구한 후
 #LIS길이의 역순에 해당하는 인덱스부터 가장 빨리 해당 index가 나오는 element를 구한다.
 #차례로 구한 후 reverse하면, 구하고자 하는 LIS가 나온다.
-
-
-    
+target_index = n
+for i in range(end+1, 0, -1):
+    for j in range(target_index-1,  -1, -1):
+        if dp_index[j] == i:
+            answer.append(arr[j])
+            target_index = j
+            break
+#역순
+answer.reverse()
