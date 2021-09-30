@@ -52,5 +52,10 @@ for i in range(1, length_2 + 1):
         max_longest_common_subsequence_length = max(arr2[i])
 print(max_longest_common_subsequence_length)
 
-
+#Longest Common Subsequence 구하는 방법
+# 1. LCS 배열의 가장 마지막 값에서 시작 / 결과값을 저장할 result 배열을 준비
+# 2. LCS[i - 1][j]와 LCS[i][j - 1] 중 현재 값과 같은 값을 탐색
+# # 2-1. 만약 같은 값이 있다면 해당 값으로 이동
+# 2-2. 만약 같은 값이 없다면 result배열에 해당 문자를 넣고 LCS[i -1][j - 1]로 이동
+# 2번 과정을 반복하다가 0으로 이동하게 되면 종료. result 배열의 역순 출력.
 
