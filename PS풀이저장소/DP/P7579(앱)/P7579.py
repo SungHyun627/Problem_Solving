@@ -25,6 +25,8 @@ for i in range(n):
                 dp[i][j] = weights[i]
             else:
                 dp[i][j] = max(dp[i-1][j-costs[i]] + weights[i], dp[i-1][j])
-        if dp[i][j] >= m and min_cost > j:
-            min_cost = j
-print(min_cost)
+
+for k in range(10001):
+    if dp[n-1][k] >=m:
+        print(dp[n-1][k])
+        break
