@@ -1,4 +1,4 @@
-#P17387 선분 교차
+#P17387 선분 교차2
 from sys import stdin
 stdin = open('./input.txt', 'r')
 
