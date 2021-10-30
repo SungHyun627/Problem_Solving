@@ -20,7 +20,7 @@ class Trie:
     def search(self, s):
         cur_node = self.root
         for c in s:
-            if c in s:
+            if c in cur_node:
                 cur_node = cur_node[c]
             else:
                 return False
