@@ -21,7 +21,7 @@ def update(i, diff):
     while i <= n:
         tree[i] += diff
         #0이 아닌 마지막 비트만큼 더하면서 이동
-        i = (i&-i)
+        i += (i&-i)
 
 # Start부터 end까지의 구간 합을 계산하는 함수
 def interval_sum(start, end):
