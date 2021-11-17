@@ -17,7 +17,7 @@ def prefix_sum(i):
     return result
 
 #i번째 수를 diff만큼 더하는 함수
-def update(diff):
+def update(i, diff):
     while i <= n:
         tree[i] += diff
         #0이 아닌 마지막 비트만큼 더하면서 이동
