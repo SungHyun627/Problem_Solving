@@ -5,7 +5,7 @@
 # 2-2. 이후 부모가 같아질 때까지 반복적으로 두 노드의 부모 방향으로 거슬러 올라간다.
 # 3. 모든 LCA(a, b) 연산에 대하여 2번의 과정 반복
 
-# 매 쿼리마다 거슬러 올라가기 때문에 O(logn) => m개의 쿼리는 O(mlogn)
+# 매 쿼리마다 거슬러 올라가기 때문에 O(n) => m개의 쿼리는 O(mn)
 
 from sys import stdin, setrecursionlimit
 
@@ -60,3 +60,52 @@ for i in range(m):
     a, b = map(int, stdin.readline().split())
     print(LCA(a,b))
 
+# 개선된 알고리즘, 세그먼트 트리를 이용해서 시간복잡도 개선 => O(mlogn)
+LOG = 21
+parent = [[0]*LOG for _ in range(n+1)]
+# c와 d는 동일
+
+def dfs(x, depth):
+    c[x] = True
+    d[x] = depth
+    for y in graph[x]:
+        if c[y]:
+            continue
+        parent[y][0] = x
+        dfs(y, depth+1)
+
+# 전체 부모 관계를 설정하는 함수
+def set_parent():
+    # 1이 루트노드
+    dfs(1, 0)
+    for i in range(1, LOG):
+        for j in range(1, n+1):
+            parent[j][i] = parent[parent[j][i-1]][i-1]
+
+# A와 B의 최소 공통 조상을 찾는 함수
+def LCA(a, b):
+    # b가 더 깊도록 설정
+    if d[a] > d[b]:
+        a, b  = b, a
+    # 깊이가 동일하도록
+    for i in range(LOG -1, -1, -1):
+        if d[b]- d[a] >= (1 << i):
+            b = parent[b][i]
+    # 부모가 같아지도록
+    if a == b:
+        return a
+    for i in range(LOG -1, -1, -1):
+        # 조상을 향해 거슬러 올라가기
+        if parent[a][i] != parent[b][i]:
+            a = parent[a][i]
+            b = parent[b][i]
+    
+    # 부모가 찾고자 하는 조상
+    return parent[a][0]
+
+set_parent()
+m = int(stdin.readlien())
+
+for i in range(m):
+    a, b = map(int, stdin.readline().split())
+    print(LCA(a,b))
