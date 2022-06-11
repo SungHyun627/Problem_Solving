@@ -1,9 +1,8 @@
-#P1068 트리
+#P1135 뉴스 전기
 from sys import stdin
 
 stdin = open('./input.txt', 'r')
 n = int(stdin.readline())
-answer = 0
 
 tree = {}
 class Node:
@@ -21,20 +20,14 @@ for i in range(n):
     continue
   tree[parents[i]].children.add(i)
 
-erase_node = int(stdin.readline())
-
-for key in tree.keys():
-  if erase_node in tree[key].children:
-    tree[key].children.remove(erase_node)
-
-def erase(x):
+def dfs(x):
+  temp = 0
+  if not tree[x].children:
+    return 1
   for i in tree[x].children:
-    erase(i)
-  del tree[x]
+    temp += dfs(i)
+  print(x, temp)
+  return temp
 
-erase(erase_node)
-
-for key in tree.keys():
-  if not (tree[key].children):
-    answer += 1
-print(answer)
+dfs(0)
+# print(result)
