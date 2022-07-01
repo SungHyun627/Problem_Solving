@@ -3,7 +3,6 @@ from collections import deque
 #위, 아래로만 이동
 dx, dy = [-1, 1, 0, 0], [0, 0, -1, 1]
 
-board = [[0, 0, 1, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1, 0, 0, 0, 0], [1, 0, 0, 0, 1, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 1, 1, 1, 0, 0, 0, 0, 0], [0, 0, 0, 0, 1, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 1, 1, 0, 1], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
 def check_out_of_boundary(t, n):
     if t[0] < 0 or t[1] < 0 or t[0] >= n or t[1] >= n:
         return True
@@ -57,7 +56,7 @@ def solution(board):
                         q.append((pos2, (pos1[0]+1, pos1[1]+1), 2, count + 1))
                         visited.add((pos2, (pos1[0]+1, pos1[1]+1), 2))
             #위로 회전 가능하다면
-            if (pos1[0] - 1) > 0:
+            if (pos1[0] - 1) >= 0:
                 if not board[pos1[0]-1][pos1[1]] and not board[pos2[0]-1][pos2[1]]:
                     if not ((pos2[0]-1, pos2[1]-1), pos1, 2) in visited:
                         if pos1[0] == n-1 and pos1[1] == n-1:
@@ -85,7 +84,7 @@ def solution(board):
                         q.append((pos2, (pos1[0]+1, pos1[1]+1), 1, count + 1))
                         visited.add((pos2, (pos1[0]+1, pos1[1]+1), 1))
             #왼쪽으로 회전 가능하다면
-            if (pos1[1] - 1) > 0:
+            if (pos1[1] - 1) >= 0:
                 if not board[pos1[0]][pos1[1]-1] and not board[pos2[0]][pos2[1]-1]:
                     if not ((pos2[0]-1, pos2[1]-1), pos1, 1) in visited:
                         if pos1[0] == n-1 and pos1[1] == n-1:
@@ -97,5 +96,3 @@ def solution(board):
                             return count + 1
                         q.append(((pos1[0]+1, pos1[1]-1), pos2, 1, count + 1))
                         visited.add(((pos1[0]+1, pos1[1]-1), pos2, 1))
-
-print(solution(board))
