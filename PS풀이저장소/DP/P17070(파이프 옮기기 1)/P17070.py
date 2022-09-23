@@ -1,4 +1,4 @@
-#P17070 파이프 옮기기
+#P17070 파이프 옮기기 1
 from sys import stdin
 stdin = open('./input.txt', 'r')
 n = int(stdin.readline())
