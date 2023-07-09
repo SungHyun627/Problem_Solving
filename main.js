@@ -1,10 +1,1 @@
-arr = new Array(6).fill(0).map((el, i) => i + 1);
-arr1 = arr.filter((el) => el < 4);
-t = 12;
-console.log(arr);
-console.log(arr1);
-console.log(arr.find((el) => el < 6));
-console.log('z'.codePointAt(0));
-console.log(String.fromCodePoint(90));
-console.log(~(1 << 3).toString(2));
-console.log((t.toString(2) & ~(1 << 3)).toString(2));
+console.log('1');
