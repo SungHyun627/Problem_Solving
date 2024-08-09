@@ -7,7 +7,10 @@ const getCombination = (arr, n) => {
   arr.forEach((fixed, idx, origin) => {
     const rest = origin.slice(idx + 1);
     const combis = getCombination(rest, n - 1);
-    const attached = combis.map((combi) => [fixed, ...combi]);
+    const attached = combis.map((combi) => {
+      if (n === 2) return [fixed, combi];
+      return [fixed, ...combi];
+    });
     result.push(...attached);
   });
 
@@ -21,7 +24,10 @@ const getPermutaion = (arr, n) => {
   arr.forEach((fixed, idx, origin) => {
     const rest = [...origin.slice(0, idx), ...origin.slice(idx + 1)];
     const perms = getPermutation(rest, n - 1);
-    const attached = perms.map((perm) => [fixed, ...perm]);
+    const attached = perms.map((perm) => {
+      if (n === 2) return fixed, perm;
+      return [fixed, ...perm];
+    });
     result.push(...attached);
   });
 
