@@ -43,8 +43,8 @@ console.log(str1.indexOf('c'));
 /**
  
 ## Map 객체(a)
+Map은 삽입 순서를 기억
 - map 생성 => let a = new Map();
-
 - set: 값 추가 => a.set(key, value)
 - get : 값 조회 => a.get(key)
 - has : 값 존재 유무 확인 => a.has(key)
@@ -54,6 +54,14 @@ console.log(str1.indexOf('c'));
 - map 정렬 => map 객체를 배열로 변환 => 정렬 => map 객채로 변환
 
  */
+
+let a = new Map();
+const key = [2, 3];
+a.set(1, 2);
+a.set(key, new Map());
+
+console.log(a.delete(key));
+console.log(a);
 
 /** Set(b) : 중복 허락 x
  - 생성 : let b = new Set();
