@@ -41,7 +41,7 @@ class Heap {
     let parentIdx = Math.floor((curIdx - 1) / 2);
 
     // 부모 값이 존재하고, 부모 값보다 현재값이 더 작은 경우 swap
-    while (this.heap[parentIdx] && this.heap[curIdx][1] < this.heap[parentIdx][1]) {
+    while (curIdx > 0 && this.heap[curIdx] < this.heap[parentIdx]) {
       this.swap(curIdx, parentIdx);
       curIdx = parentIdx;
       parentIdx = Math.floor((curIdx - 1) / 2);
@@ -54,11 +54,12 @@ class Heap {
     let rightIdx = curIdx * 2 + 2;
 
     while (
-      (this.heap[leftIdx] && this.heap[leftIdx][1] < this.heap[curIdx][1]) ||
-      (this.heap[rightIdx] && this.heap[rightIdx][1] < this.heap[curIdx][1])
+      (this.heap[leftIdx] && this.heap[leftIdx] < this.heap[curIdx]) ||
+      (this.heap[rightIdx] && this.heap[rightIdx] < this.heap[curIdx])
     ) {
       let smallerIdx = leftIdx;
-      if (this.heap[rightIdx] && this.heap[rightIdx][1] < this.heap[smallerIdx][1]) {
+
+      if (this.heap[rightIdx] && this.heap[rightIdx] < this.heap[smallerIdx]) {
         smallerIdx = rightIdx;
       }
 
@@ -69,3 +70,12 @@ class Heap {
     }
   }
 }
+
+const h = new Heap();
+console.log(h.heappush(2));
+console.log(h.heappush(3));
+console.log(h.heappush(100));
+console.log(h.heappush(5));
+console.log(h.heappop());
+console.log(h.heappop());
+console.log(h.get());
