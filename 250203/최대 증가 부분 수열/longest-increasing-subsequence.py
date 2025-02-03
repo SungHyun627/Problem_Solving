@@ -6,8 +6,6 @@ dp[0] = 1
 
 for i in range(n):
     for j in range(0, i):
-        if arr[i] <= arr[j]:
-            dp[i] = max(dp[i], dp[j])
-        else:
+        if arr[i] > arr[j]:
             dp[i] = max(dp[i], dp[j] + 1)
-print(dp[n-1])
+print(max(dp))
