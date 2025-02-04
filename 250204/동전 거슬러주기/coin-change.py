@@ -1,7 +1,7 @@
 n, m = map(int, input().split())
 coin = list(map(int, input().split()))
 
-dp = [m] * (m+1)
+dp = [m+1] * (m+1)
 dp[0] = 0
 
 
