@@ -27,7 +27,8 @@ sequences.sort(lambda x: (len(x), x))
 
 def check():
     t = Trie()
-    for i in range(n-1, -1, -1):
+    seq_len = len(sequences)
+    for i in range(seq_len-1, -1, -1):
         s = sequences[i]
         if t.search(s):
             return True
