@@ -1,4 +1,6 @@
+from sys import setrecursionlimit
 n = int(input())
+setrecursionlimit(10**6)
 
 parent = [-1] * (n+1)
 parent[1] = 0
