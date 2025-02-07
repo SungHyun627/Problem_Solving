@@ -1,3 +1,5 @@
+from sys import setrecursionlimit
+setrecursionlimit(10**6)
 n = int(input())
 
 # Initialize arrays with n+1 size to match 1-based indexing
