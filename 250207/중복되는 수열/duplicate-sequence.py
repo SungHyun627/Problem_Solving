@@ -1,5 +1,5 @@
 n = int(input())
-sequences = [input() for _ in range(n)]
+sequences = list(set(input() for _ in range(n)))
 
 class Trie:
     def __init__(self):
@@ -21,7 +21,7 @@ class Trie:
                 cur_node = cur_node[c]
             else:
                 return False
-        return not ('*' in cur_node and len(cur_node) == 1)
+        return True
 
 sequences.sort(lambda x: (len(x), x))
 
