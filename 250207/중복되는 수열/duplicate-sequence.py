@@ -21,7 +21,7 @@ class Trie:
                 cur_node = cur_node[c]
             else:
                 return False
-        return True
+        return len(cur_node.keys()) != 0
 
 sequences.sort(lambda x: (len(x), x))
 
