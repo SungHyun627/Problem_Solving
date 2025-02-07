@@ -1,7 +1,8 @@
 n = int(input())
 graph = [list(map(int, input().split())) for _ in range(n)]
 
-dp = [[0]*(n) for _ in range(n)]
+dp = [[0]*n for _ in range(n)]
+dp[0][0] = graph[0][0]
 
 for i in range(1, n):
     dp[0][i] = max(dp[0][i-1], graph[0][i])
