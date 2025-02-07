@@ -1,24 +1,20 @@
-from sys import setrecursionlimit
 n = int(input())
-setrecursionlimit(10**6)
 
 parent = [-1] * (n+1)
 parent[1] = 0
+graph = [[] for _ in range(n+1)]
 
-pairs = [tuple(map(int, input().split())) for _ in range(n-1)]
+for _ in range(n-1):
+    a, b = map(int, input().split())
+    graph[a].append(b)
+    graph[b].append(a)
 
-def find_children(t):
-    nodes = [i for i in pairs if t in i]
-    for node in nodes:
-        a, b = node
-        if parent[a] != -1 and parent[b] != -1:
-            continue    
-        if parent[b] != -1:
-            parent[a] = b
-            find_children(a)
-        else:
-            parent[b] = a
-            find_children(b)
+def find_parent(t):
+    for node in graph[t]:
+        if parent[node] != -1:
+            continue
+        parent[node] = t
+        find_parent(node)
 
-find_children(1)
+find_parent(1)
 print(*parent[2:], sep="\n")
