@@ -9,4 +9,4 @@ if n >= 3:
     for i in range(4, n+1):
         dp[i] = dp[i-2] + dp[i-3]
 
-print(dp[n] & 10007)
+print(dp[n] % 10007)
