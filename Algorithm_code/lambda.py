@@ -16,7 +16,7 @@ print(list(map(lambda x, y : str(x) + y, a, b)))
 # 2. filter : iterable한 객체에서 특정 조건에 맞는 요소만 가져올 때 사용, filter내부의 함수의 반환값이 True일때 해당 요소를 가져온다.
 def func(x):
     return x > 5 and x < 10
-print(list(filter(lambda x : x > 5 and x < 10, c)))
+print(list(filter( x : x > 5 and x < 10, c)))
 
 # 3. reduce : iterable한 객체의 각 요소를 지정된 함수로 처리한 뒤 이전 결과와 누적해서 반환하는 함수
 def f(x, y):
