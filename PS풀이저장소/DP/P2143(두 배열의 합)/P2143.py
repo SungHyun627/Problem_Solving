@@ -33,3 +33,36 @@ for i in range(len(b)):
   result += (bisect_right(a, k)-bisect_left(a, k))
 
 print(result)
+
+
+### dictionary 사용 풀이법 추가
+from sys import stdin
+from collections import defaultdict
+stdin = open('./input.txt', 'r')
+
+t = int(stdin.readline())
+n = int(stdin.readline())
+arr1 = list(map(int, stdin.readline().split()))
+m = int(stdin.readline())
+arr2 = list(map(int, stdin.readline().split()))
+result = 0
+
+a = defaultdict(int)
+b = []
+
+for i in range(n):
+  total = 0
+  for j in range(i, n):
+    total += arr1[j]
+    a[total] += 1 
+
+for i in range(m):
+  total = 0
+  for j in range(i, m):
+    total += arr2[j]
+    b.append(total)
+
+for k in b:
+  result += a[t-k]
+
+print(result)
