@@ -1,24 +1,48 @@
-#P12865(평범한 배낭)
 from sys import stdin
-
 stdin = open('./input.txt', 'r')
 
-#n : 물품의 수, k: 버틸 수 있는 무게
+### 1차원 배열
 n, k = map(int, stdin.readline().split())
+weights = []
+values = []
 
-values = [(0, 0)]
 for _ in range(n):
-    values.append(tuple(map(int, stdin.readline().split())))
+  a, b = map(int, stdin.readline().split())
+  weights.append(a)
+  values.append(b)
+
+dp = [0] * (k+1)
+
+for i in range(1, n+1):
+  w = weights[i-1]
+  v = values[i-1]
+
+  for j in range(k, w-1, -1):
+    dp[j] = max(dp[j], dp[j-w] + v)
+print(dp[k])
+
+
+
+### 2차원 배열
+n, k = map(int, stdin.readline().split())
+weights = []
+values = []
+
+for _ in range(n):
+  a, b = map(int, stdin.readline().split())
+  weights.append(a)
+  values.append(b)
 
 dp = [[0] * (k+1) for _ in range(n+1)]
 
 for i in range(1, n+1):
-    for j in range(1, k+1):
-        #해당 제품의 무게가 허용가능한 무게보다 크다면
-        if values[i][0] > j:
-            dp[i][j] = dp[i-1][j]
-        else:
-            # 해당 제품을 포함하는 경우 / 포함하지 않은 경우 중 max
-            dp[i][j] = max(values[i][1] + dp[i-1][j-values[i][0]], dp[i-1][j])
+  w = weights[i-1]
+  v = values[i-1]
+
+  for j in range(k+1):
+    if j < w:
+      dp[i][j] = dp[i-1][j]
+    else:
+      dp[i][j] = max(dp[i-1][j], dp[i-1][j-w] +v)
 
 print(dp[n][k])
