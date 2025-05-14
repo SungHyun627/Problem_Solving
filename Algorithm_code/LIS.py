@@ -72,3 +72,26 @@ for i in range(end+1, 0, -1):
             break
 #역순
 answer.reverse()
+
+##LIS 구하는 법 추가
+def lis_with_sequence(arr):
+    n = len(arr)
+    dp = [1] * n
+    path = [-1] * n
+
+    for i in range(n):
+        for j in range(i):
+            if arr[j] < arr[i] and dp[i] < dp[j] + 1:
+                dp[i] = dp[j] + 1
+                path[i] = j
+
+    max_len = max(dp)
+    idx = dp.index(max_len)
+
+    sequence = []
+    while idx != -1:
+        sequence.append(arr[idx])
+        idx = path[idx]
+    sequence.reverse()
+
+    return max_len, sequence
