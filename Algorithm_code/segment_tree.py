@@ -25,21 +25,22 @@ def init(node, start, end):
     if start == end:
         tree[node] = a[start]
         return
-    else:
-        mid = (start + end) // 2
-        init(node*2, start, mid)
-        init(node*2 + 1, mid+1, end)
-        tree[node] = tree[node*2] + tree[node*2 + 1]
+    mid = (start + end) // 2
+    init(node*2, start, mid)
+    init(node*2 + 1, mid+1, end)
+    tree[node] = tree[node*2] + tree[node*2 + 1]
 
-#트리 업데이트
-def update(node, start, end, index, diff):
-    if (index < start) or (index > end):
+#트리 업데이트(구간 곱 기준)
+def update(node, start, end, idx, val):
+    if (idx < start) or (end < idx):
         return
-    tree[node] += diff
-    if (start != end):
-        mid = (start + end) // 2
-        update(node * 2, start, mid, index, diff)
-        update(node * 2 + 1, mid + 1, end, index, diff)
+    if start == end:
+      tree[node] = val
+      return
+    mid = (start + end) // 2
+    update(node * 2, start, mid, idx, diff)
+    update(node * 2 + 1, mid + 1, end, idx, diff)
+    tree[node] = (tree[node*2] * tree[node*2+1])
 
 
 #구간 합 구하기
