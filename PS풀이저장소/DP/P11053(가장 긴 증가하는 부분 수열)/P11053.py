@@ -1,5 +1,5 @@
 from sys import stdin
-
+#P11053 가장 긴 증가하는 부분 수열
 stdin = open('./input.txt', 'r')
 n = int(stdin.readline())
 arr = list(map(int, stdin.readline().rstrip().split()))
