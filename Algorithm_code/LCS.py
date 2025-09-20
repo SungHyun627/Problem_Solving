@@ -59,3 +59,18 @@ print(max_longest_common_subsequence_length)
 # 2-2. 만약 같은 값이 없다면 result배열에 해당 문자를 넣고 LCS[i -1][j - 1]로 이동
 # 2번 과정을 반복하다가 0으로 이동하게 되면 종료. result 배열의 역순 출력.
 
+# 역추적 (문자열 복원)
+i, j = n, m
+lcs = []
+while i > 0 and j > 0:
+    if s1[i-1] == s2[j-1]:
+        lcs.append(s1[i-1])
+        i -= 1
+        j -= 1
+    elif dp[i-1][j] >= dp[i][j-1]:
+        i -= 1
+    else:
+        j -= 1
+
+lcs.reverse()
+print(''.join(lcs))
