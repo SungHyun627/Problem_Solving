@@ -1,15 +1,18 @@
-const arr1 = [1, 2, 3, 4, 5, 6, 7];
-const n = arr1.length;
-const target = 4;
+const a = [3, 1, 2, 3, 4];
+a.sort((a, b) => a - b);
 
-const binarySearch = (arr, target, start, end) => {
+const binary_search = (arr, target) => {
+  let start = 0;
+  let end = arr.length - 1;
+
   while (start <= end) {
-    mid = parseInt((start + end) / 2);
-    if (arr[mid] === target) return mid;
-    if (arr[mid] > target) {
-      end = mid - 1;
-    } else {
-      start = mid + 1;
-    }
+    let mid = Math.floor((start + end) / 2);
+    if (arr[mid] == target) return mid;
+    if (arr[mid] > target) end = mid - 1;
+    else start = mid + 1;
   }
+  return -1;
 };
+
+console.log(a);
+console.log(binary_search(a, 2));
