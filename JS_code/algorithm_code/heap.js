@@ -11,8 +11,8 @@ class Heap {
     return this.heap.length;
   }
 
-  swap(idx1, idx2) {
-    [this.heap[idx1], this.heap[idx2]] = [this.heap[idx2], this.heap[idx1]];
+  swap(i, j) {
+    [this.heap[i], this.heap[j]] = [this.heap[j], this.heap[i]];
   }
 
   heappush(value) {
@@ -21,13 +21,8 @@ class Heap {
   }
 
   heappop() {
-    if (this.heap.length === 0) {
-      return null;
-    }
-
-    if (this.heap.length === 1) {
-      return this.heap.pop();
-    }
+    if (this.size() === 0) return undefined;
+    if (this.size() === 1) return this.heap.pop();
 
     const value = this.heap[0];
     this.heap[0] = this.heap.pop();
@@ -36,37 +31,28 @@ class Heap {
   }
 
   bubbleUp() {
-    let curIdx = this.heap.length - 1;
-    //부모 인덱스
-    let parentIdx = Math.floor((curIdx - 1) / 2);
-
-    // 부모 값이 존재하고, 부모 값보다 현재값이 더 작은 경우 swap
-    while (curIdx > 0 && this.heap[curIdx] < this.heap[parentIdx]) {
-      this.swap(curIdx, parentIdx);
-      curIdx = parentIdx;
-      parentIdx = Math.floor((curIdx - 1) / 2);
+    let idx = this.size() - 1;
+    while (idx > 0) {
+      const parent = Math.floor((idx - 1) / 2);
+      if (this.heap[parent] <= this.heap[idx]) break;
+      this.swap(idx, parent);
+      idx = parent;
     }
   }
 
   bubbleDown() {
-    let curIdx = 0;
-    let leftIdx = curIdx * 2 + 1;
-    let rightIdx = curIdx * 2 + 2;
+    let idx = 0;
+    while (true) {
+      const left = idx * 2 + 1;
+      const right = idx * 2 + 2;
+      let smallest = idx;
 
-    while (
-      (this.heap[leftIdx] && this.heap[leftIdx] < this.heap[curIdx]) ||
-      (this.heap[rightIdx] && this.heap[rightIdx] < this.heap[curIdx])
-    ) {
-      let smallerIdx = leftIdx;
+      if (left < this.size() && this.heap[left] < this.heap[smallest]) smallest = left;
+      if (right < this.size() && this.heap[right] < this.heap[smallest]) smallest = right;
+      if (smallest === idx) break;
 
-      if (this.heap[rightIdx] && this.heap[rightIdx] < this.heap[smallerIdx]) {
-        smallerIdx = rightIdx;
-      }
-
-      this.swap(curIdx, smallerIdx);
-      curIdx = smallerIdx;
-      leftIdx = curIdx * 2 + 1;
-      rightIdx = curIdx * 2 + 2;
+      this.swap(idx, smallest);
+      idx = smallest;
     }
   }
 }
