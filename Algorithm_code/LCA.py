@@ -109,3 +109,64 @@ m = int(stdin.readlien())
 for i in range(m):
     a, b = map(int, stdin.readline().split())
     print(LCA(a,b))
+
+
+import sys
+sys.setrecursionlimit(10**7)
+input = sys.stdin.readline
+
+# LOG: 부모 테이블의 최대 깊이(2^LOG > n)
+LOG = 17  # 예: n <= 100000이면 2^17 = 131072 > 100000
+
+n = int(input())                # 노드 수
+graph = [[] for _ in range(n+1)]  # 1-indexed 인접 리스트
+
+for _ in range(n-1):
+    a, b = map(int, input().split())
+    graph[a].append(b)
+    graph[b].append(a)
+
+# parent[k][v] = v에서 2^k 만큼 위로 올라간 노드 (없으면 0)
+parent = [[0] * (n+1) for _ in range(LOG)]
+depth = [0] * (n+1)
+visited = [False] * (n+1)
+
+def dfs(x, d):
+    visited[x] = True
+    depth[x] = d
+    for nx in graph[x]:
+        if not visited[nx]:
+            parent[0][nx] = x  # nx의 바로 위 부모 저장 (2^0 = 1)
+            dfs(nx, d+1)
+
+# 루트가 1일 때
+dfs(1, 0)
+
+# Binary Lifting 테이블 생성
+for k in range(1, LOG):
+    for v in range(1, n+1):
+        parent[k][v] = parent[k-1][ parent[k-1][v] ]
+
+def lca(a, b):
+    # 1) depth 맞추기: 항상 a가 더 깊게 만든다
+    if depth[a] < depth[b]:
+        a, b = b, a
+
+    diff = depth[a] - depth[b]
+    # diff를 이진수로 분해하여 a를 한 번에 올린다
+    for k in range(LOG):
+        if diff & (1 << k):
+            a = parent[k][a]
+
+    # 2) 이미 같으면 LCA 찾음
+    if a == b:
+        return a
+
+    # 3) 가장 높은 2^k부터 내려오며 서로 다른 부모를 찾아 함께 올린다
+    for k in reversed(range(LOG)):
+        if parent[k][a] != parent[k][b]:
+            a = parent[k][a]
+            b = parent[k][b]
+
+    # 이제 a와 b는 서로 다른 노드이지만 바로 부모는 같다
+    return parent[0][a]
