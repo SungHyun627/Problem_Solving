@@ -89,3 +89,88 @@ console.log(a);
  *  V 다익스트라
  *  V 이분탐색
  *  */
+
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
+
+class LinkedList {
+  constructor() {
+    this.head = null;
+    this.length = 0;
+  }
+  append(value) {
+    const newNode = new Node(value);
+    if (!this.head) {
+      this.head = newNode;
+    } else {
+      let current = this.head;
+      while (current.next) {
+        current = current.next;
+      }
+      current.next = newNode;
+    }
+    this.length++;
+  }
+
+  prepend(value) {
+    const newNode = new Node(value);
+    newNode.next = this.head;
+    this.head = newNode;
+    this.length++;
+  }
+
+  remove(value) {
+    if (!this.head) return;
+    if (this.head.value === value) {
+      this.head = this.head.next;
+      this.length--;
+      return;
+    }
+
+    let current = this.head;
+    while (current.next && current.next.value !== value) {
+      current = current.next;
+    }
+
+    if (current.next) {
+      current.next = current.next.next;
+      this.length--;
+    }
+  }
+
+  find(value) {
+    let current = this.head;
+    while (current) {
+      if (current.value === value) return current;
+      current = current.next;
+    }
+    return null;
+  }
+
+  print() {
+    let current = this.head;
+    const values = [];
+    while (current) {
+      values.push(current.value);
+      current = current.next;
+    }
+    console.log(values.join(' --> '));
+  }
+}
+
+const list = new LinkedList();
+list.append(1);
+list.append(2);
+list.append(3);
+list.prepend(0);
+
+list.print(); // 0 -> 1 -> 2 -> 3
+
+list.remove(2);
+list.print(); // 0 -> 1 -> 3
+
+console.log(list.find(3));
